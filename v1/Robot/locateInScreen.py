@@ -16,7 +16,9 @@ def collect(image_pos, delay):
     center_x, center_y = x + width / 2, y + height / 2
 
     # move cursos to center img and click them
+    # center_pos = pg.locateCenterOnScreen(image_pos)
     pg.moveTo(center_x, center_y)
+
     pg.click()
     time.sleep(delay)
 
@@ -29,10 +31,13 @@ def get_resource(url_img):
 
     try:
         while True:
-            image_pos = pg.locateOnScreen(url_img, confidence=0.8)
+            image_pos = pg.locateOnScreen(url_img, confidence=0.95)
+
             if image_pos == None:
-                collect(image_pos, 2)
+                print(f"Mena encontrada")
+                collect(255,157, 1)
             else:
+                print("La mena esta agotada...")
                 break
     except:
         print(f"next resource in step {counter}")
@@ -43,7 +48,12 @@ def get_map(url_img):
 
     try:
         while True:
-            image_pos = pg.locateOnScreen(url_img, confidence=0.8)
-            collect(image_pos, 5)
+            image_pos = pg.locateOnScreen(url_img, confidence=0.95)
+
+            if image_pos:
+                collect(image_pos, 3)
+            elif image_pos == None:
+                time.sleep(1.5)
+                break
     except:
         print(f"next map in step {counter}")
