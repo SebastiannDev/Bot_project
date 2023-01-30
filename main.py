@@ -10,7 +10,7 @@ def main():
 
 def showUI():
     print("""
-    1. Mostrar mensaje
+    1. Iniciar ruta
     2. Iniciar capturadora de imagenes
     3. Salir
     """)

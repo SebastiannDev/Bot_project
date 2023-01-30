@@ -1,28 +1,42 @@
 import pyautogui, keyboard, time
 
 counter = 0
+
 def stop_loop():
         global running
         running = False
         print("bye")
 
 def capture():
-        global counter
-        x, y = pyautogui.position()
+    global counter
+    x, y = pyautogui.position()
 
-        left = x - 15
-        top = y - 30
-        right = x + 15
-        bottom = y + 30
+    left = x - 15
+    top = y - 30
+    right = x + 15
+    bottom = y + 30
 
-        im = pyautogui.screenshot()
-        im = im.crop((left, top, right, bottom))
+    im = pyautogui.screenshot()
+    im = im.crop((left, top, right, bottom))
+    return im
 
-        counter += 1
-        url = f'./Images/image_{counter}.png'
-        im.save(url)
-        print(f"Se ha capturado una imagen: {url}")
-        
+def resource():
+    im = capture()
+    
+    counter += 1
+
+    url = f'./Images/resource_{counter}.png'
+    im.save(url)
+    print(f"Se ha capturado una recurso: {url}")
+
+def location():
+    im = capture()
+    
+    counter += 1
+
+    url = f'./Images/map_{counter}.png'
+    im.save(url)
+    print(f"Se ha capturado un mapa: {url}")
 
 def close():
     global running
@@ -36,5 +50,9 @@ def capturar_imagen():
             break
         elif(keyboard.is_pressed('p')):
             time.sleep(0.5)
-            capture()
+            resource()
+        elif keyboard.is_pressed('m'):
+            time.sleep(.5)
+            location()
+        
   
